@@ -1,0 +1,8 @@
+[package]
+name = "InitialGUI"
+version = "0.1.0"
+authors = ["lminozzo <laerciominozzo@hotmail.com>"]
+edition = "2018"
+
+[dependencies]
+gtk = { git = "https://github.com/gtk-rs/gtk.git" }
