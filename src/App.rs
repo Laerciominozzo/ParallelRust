@@ -56,7 +56,7 @@ impl janelaPrincipal{
 
 struct Desenho{
     desenhoArea: Image,
-    pixbuf: Pixbuf,
+
 }
 
 impl Desenho{
@@ -66,7 +66,7 @@ impl Desenho{
         area.connect_draw(|widget, context|{
 
             context.arc(50.0,50.0,20.0,0.0,180.0);
-            context.paint();
+            context.stroke();
             Inhibit(false)
         });
 
