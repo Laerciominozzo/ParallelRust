@@ -5,4 +5,11 @@ authors = ["lminozzo <laerciominozzo@hotmail.com>"]
 edition = "2018"
 
 [dependencies]
-gtk = { git = "https://github.com/gtk-rs/gtk.git" }
+gtk = "^0"
+gio = "^0"
+gdk = "^0"
+
+[features]
+gtk_3_10 = ["gtk/v3_10"]
+
+

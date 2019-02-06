@@ -1,3 +1,10 @@
+
+mod App;
+
+
 fn main() {
-    println!("Hello, world!");
+
+    let app: App::App = App::App::novo();
+
+    gtk::main();
 }
