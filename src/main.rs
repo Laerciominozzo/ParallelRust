@@ -1,10 +1,11 @@
+pub mod UI;
 
-mod App;
+use UI::App;
 
 
 fn main() {
 
-    let app: App::App = App::App::novo();
+    let App = App::novo();
 
     gtk::main();
 }
