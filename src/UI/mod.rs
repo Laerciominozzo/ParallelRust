@@ -1,5 +1,5 @@
-mod app;
-mod janelaPrincipal;
-mod areaDesenho;
+mod janela_principal;
+mod area_desenho;
+mod my_app;
 
-pub use self::app::App;
+pub use self::my_app::App;

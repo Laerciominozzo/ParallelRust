@@ -1,7 +1,6 @@
-pub mod UI;
+mod UI;
 
 use UI::App;
-
 
 fn main() {
 

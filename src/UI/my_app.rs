@@ -8,7 +8,7 @@ use gtk::prelude::{*};
 use std::env::args;
 use std::process;
 
-use super::janelaPrincipal::janelaPrincipal;
+use super::janela_principal::janelaPrincipal;
 
 pub struct  App{
     janela :janelaPrincipal,

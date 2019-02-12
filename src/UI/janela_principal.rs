@@ -1,7 +1,7 @@
 use gtk::{Builder, Window};
 use gtk::prelude::{*};
 
-use super::areaDesenho::Desenho;
+use super::area_desenho::Desenho;
 
 pub struct janelaPrincipal{
     janela: Window,

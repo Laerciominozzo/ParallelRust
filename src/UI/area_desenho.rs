@@ -12,12 +12,15 @@ impl Desenho{
 
         area.connect_draw(|widget, context|{
 
-            context.arc(50.0,50.0,20.0,0.0,180.0);
             context.stroke();
             Inhibit(false)
         });
 
 
         Desenho {desenhoArea:area}
+    }
+
+    fn draw(positionX:i64, positionY: i64){
+
     }
 }
