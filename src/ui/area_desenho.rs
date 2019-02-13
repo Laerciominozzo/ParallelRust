@@ -2,7 +2,7 @@ use gtk::{Builder, Image};
 use gtk::prelude::{*};
 
 pub struct Desenho{
-    desenhoArea: Image,
+    desenho_area: Image,
 
 }
 
@@ -17,10 +17,10 @@ impl Desenho{
         });
 
 
-        Desenho {desenhoArea:area}
+        Desenho { desenho_area:area}
     }
 
-    fn draw(positionX:i64, positionY: i64){
+    fn draw(position_x:i64, position_y: i64){
 
     }
 }

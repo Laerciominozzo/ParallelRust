@@ -1,16 +1,16 @@
-use gtk::{Builder, Window};
+use gtk::{Window, Builder};
 use gtk::prelude::{*};
 
 use super::area_desenho::Desenho;
 
-pub struct janelaPrincipal{
+pub struct Janelaprincipal {
     janela: Window,
     desenho: Desenho,
 }
 
 
-impl janelaPrincipal{
-    pub fn novo(builder: gtk::Builder) -> janelaPrincipal{
+impl Janelaprincipal {
+    pub fn novo(builder: gtk::Builder) -> Janelaprincipal {
         let janela:Window = builder.get_object("janela").unwrap();
 
         janela.show_all();
@@ -21,6 +21,6 @@ impl janelaPrincipal{
         });
         let desenho = Desenho::new(builder);
 
-        janelaPrincipal{janela,desenho}
+        Janelaprincipal {janela,desenho}
     }
 }

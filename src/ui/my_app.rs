@@ -3,22 +3,21 @@ extern crate gio;
 extern crate gdk;
 
 
-use gtk::{Builder,};
-use gtk::prelude::{*};
+use gtk::{Builder};
 use std::env::args;
 use std::process;
 
-use super::janela_principal::janelaPrincipal;
+use super::janela_principal::Janelaprincipal;
 
-pub struct  App{
-    janela :janelaPrincipal,
+pub struct app {
+    janela : Janelaprincipal,
 
 }
 
 
-impl App{
+impl app {
 
-    pub fn novo()->App{
+    pub fn novo()-> app {
         if gtk::init().is_err() {
             eprintln!("failed to initialize GTK Application");
             process::exit(1);
@@ -27,7 +26,7 @@ impl App{
         let glade_src = include_str!("../window.glade");
         let builder = gtk::Builder::new_from_string(glade_src);
 
-        App{ janela: janelaPrincipal::novo(builder)}
+        app { janela: Janelaprincipal::novo(builder)}
     }
 
 
