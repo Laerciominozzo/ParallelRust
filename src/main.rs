@@ -1,6 +1,6 @@
-mod UI;
+mod ui;
 
-use UI::app;
+use ui::app;
 
 fn main() {
 
