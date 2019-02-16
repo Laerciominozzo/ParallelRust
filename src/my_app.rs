@@ -7,7 +7,7 @@ use gtk::{Builder};
 use std::env::args;
 use std::process;
 
-use super::janela_principal::Janelaprincipal;
+use super::ui::Janelaprincipal;
 
 pub struct app {
     janela : Janelaprincipal,
@@ -23,7 +23,7 @@ impl app {
             process::exit(1);
         }
 
-        let glade_src = include_str!("../window.glade");
+        let glade_src = include_str!("window.glade");
         let builder = gtk::Builder::new_from_string(glade_src);
 
         app { janela: Janelaprincipal::novo(builder)}

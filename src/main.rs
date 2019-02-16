@@ -1,6 +1,7 @@
 mod ui;
+mod my_app;
 
-use ui::app;
+use my_app::app;
 
 fn main() {
 
