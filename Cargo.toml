@@ -8,6 +8,7 @@ edition = "2018"
 gtk = "^0"
 gio = "^0"
 gdk = "^0"
+cairo-rs = "^0"
 
 [features]
 gtk_3_10 = ["gtk/v3_10"]

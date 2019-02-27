@@ -1,32 +1,28 @@
-use gtk::{Builder, Image};
+use gtk::{Builder, DrawingArea};
 use gtk::prelude::{*};
+use cairo::Context;
 
-pub struct Desenho{
-    desenho_area: Image,
+pub type F =  fn(&DrawingArea,&Context) -> Inhibit ;
 
+pub struct Desenho {
+    desenho_area: DrawingArea,
 }
 
 impl Desenho{
-    pub fn new(builder:Builder) -> Desenho{
-        let area :Image = builder.get_object("desenho").unwrap();
+    pub fn new(builder:Builder) -> Desenho
+      {
+        let area :DrawingArea = builder.get_object("desenho").unwrap();
 
-        area.connect_draw(|widget, context| unsafe {
+        let object = Desenho { desenho_area:area};
 
-            static mut teste:f64 =50.0;
-            context.arc(teste,50.0,20.0,0.0,180.0);
-            teste = teste +1.0;
-            context.stroke();
-            widget.queue_draw();
-            Inhibit(true)
-
-        });
-
-
-        Desenho { desenho_area:area}
+        object
     }
 
 
 
-
+    pub fn atualiza(&self){
+        self.desenho_area.queue_draw();
+    }
 
 }
+//https://stackoverflow.com/questions/31595115/how-can-i-get-my-own-data-to-a-gtk-callback-when-using-rust-gnome

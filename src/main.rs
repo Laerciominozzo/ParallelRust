@@ -1,11 +1,12 @@
 mod ui;
-mod my_app;
+mod core;
 
-use my_app::app;
+
+
 
 fn main() {
 
-    let App = app::novo();
-
+    let espaco = core::Espaco::new();
+    let app = ui::App::novo(espaco);
     gtk::main();
 }
