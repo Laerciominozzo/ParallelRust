@@ -15,12 +15,13 @@ pub struct App {
 impl App {
     pub fn novo(espaco: Espaco) -> App {
 
-        let builder=gtk::Builder::new();
-        builder.add_from_file("../window.glade");
+        let glade_src = include_str!("../window.glade");
+        let builder = gtk::Builder::new_from_string(glade_src);
 
-        let janela = builder.get_object("janela").unwrap();
-        let desenho = Desenho::new(builder);
+        let janela:Window = builder.get_object("janela").unwrap();
+        let desenho:Desenho = Desenho::new(builder);
 
+        janela.show_all();
         let app = App{janela,desenho,espaco};
         app.connect_events();
 
