@@ -4,7 +4,11 @@ pub struct Objeto{
 }
 
 impl Objeto{
-    pub fn new() -> Objeto{
-        Objeto{x: 20.0, y: 20.0}
+    pub fn new(x:f64, y:f64) -> Objeto{
+        Objeto{x: x, y: y}
+    }
+
+    pub fn getCoordinates(&self) -> (f64,f64){
+        (self.x, self.y)
     }
 }
