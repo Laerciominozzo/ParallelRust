@@ -6,8 +6,9 @@ pub struct Espaco {
 
 impl Espaco{
     pub fn new() -> Espaco{
-        let espaco = Espaco{ objetos:Vec::new()};
-
+        let mut espaco = Espaco{ objetos:Vec::new()};
+        espaco.InsertObject(10.0,10.0);
+        espaco.InsertObject(20.0, 20.0);
         espaco
     }
 
@@ -22,7 +23,6 @@ impl Espaco{
         for element  in self.objetos.iter(){
             vec.push(element.getCoordinates());
         }
-
         vec
     }
 

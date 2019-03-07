@@ -1,23 +1,32 @@
-use gtk::{Builder, DrawingArea};
+use gtk::{Builder, Image};
 use gtk::prelude::{*};
 use cairo::Context;
 
-pub type F =  fn(&DrawingArea,&Context) -> Inhibit ;
+use super::Espaco;
+
 
 pub struct Desenho {
-    desenho_area: DrawingArea,
+    desenho_area: Image,
 }
 
 impl Desenho{
-    pub fn new(builder:Builder) -> Desenho
+    pub fn new(builder:Builder, espaco: Espaco) -> Desenho
       {
-        let area :DrawingArea = builder.get_object("desenho").unwrap();
+          let area :Image = builder.get_object("desenho").unwrap();
 
-        let object = Desenho { desenho_area:area};
+          let object = Desenho { desenho_area:area};
 
-        object
+          object.desenho_area.connect_draw(move |image, context|{
+
+              for e in espaco.getCoordinates(){
+                  context.arc(e.0, e.1, 1.0, 0.0, 360.0);
+              }
+              context.stroke();
+              Inhibit(true)
+          });
+
+          object
     }
-
 
 
     pub fn atualiza(&self){
