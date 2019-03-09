@@ -20,6 +20,7 @@ impl Desenho{
 
               for e in espaco.getCoordinates(){
                   context.arc(e.0, e.1, 1.0, 0.0, 360.0);
+                  context.fill();
               }
               context.stroke();
               Inhibit(true)
