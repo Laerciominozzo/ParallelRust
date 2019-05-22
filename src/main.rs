@@ -1,7 +1,7 @@
 mod ui;
 mod core;
 use std::process;
-
+use crate::core::Espaco;
 
 
 fn main() {
@@ -11,7 +11,7 @@ fn main() {
         process::exit(1);
     }
 
-    let espaco = core::Espaco::new();
-    let app = ui::App::novo(espaco);
+
+    let app = ui::App::novo();
     gtk::main();
 }

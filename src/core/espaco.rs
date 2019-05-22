@@ -1,12 +1,13 @@
 use super::objeto::Objeto;
+use core::borrow::Borrow;
 
 pub struct Espaco {
-    objetos:Vec<Objeto>,
+     objetos:Vec<Objeto>,
 }
 
 impl Espaco{
-    pub fn new() -> Espaco{
-        let mut espaco = Espaco{ objetos:Vec::new()};
+    pub fn new() ->   Espaco{
+        let mut espaco : Espaco =  Espaco{ objetos:Vec::new()};
         espaco.InsertObject(10.0,10.0);
         espaco.InsertObject(20.0, 20.0);
         espaco
@@ -24,6 +25,13 @@ impl Espaco{
             vec.push(element.getCoordinates());
         }
         vec
+    }
+
+    pub fn processa(& mut self){
+        for  objeto in & mut self.objetos{
+            objeto.setCoordinates(objeto.calcNewPosition());
+        }
+
     }
 
 }
