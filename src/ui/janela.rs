@@ -5,17 +5,17 @@ use super::area_desenho::Desenho;
 
 pub struct Janela{
     janela: Window,
-    desenho: Desenho,
+
 }
 
 impl Janela{
-    pub fn new(builder:Builder, desenho:Desenho) -> Janela{
+    pub fn new(builder:&Builder) -> Janela{
 
         let janela:Window = builder.get_object("janela").unwrap();
 
         janela.show_all();
 
-        let obj = Janela{janela:janela, desenho:desenho};
+        let obj = Janela{janela:janela};
         obj.connect_events();
 
         obj
@@ -27,4 +27,6 @@ impl Janela{
             Inhibit(false)
         });
     }
+
+
 }

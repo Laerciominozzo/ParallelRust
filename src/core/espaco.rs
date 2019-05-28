@@ -1,7 +1,8 @@
 use super::objeto::Objeto;
 use core::borrow::Borrow;
 
-pub struct Espaco {
+#[derive(Clone)]
+pub struct Espaco{
      objetos:Vec<Objeto>,
 }
 
@@ -18,14 +19,7 @@ impl Espaco{
 
     }
 
-    pub fn getCoordinates(&self)-> Vec<(f64,f64)>{
-        let mut vec = Vec::new();
 
-        for element  in self.objetos.iter(){
-            vec.push(element.getCoordinates());
-        }
-        vec
-    }
 
     pub fn processa(& mut self){
         for  objeto in & mut self.objetos{

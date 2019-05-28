@@ -2,6 +2,7 @@ mod ui;
 mod core;
 use std::process;
 use crate::core::Espaco;
+use crate::core::Objeto;
 
 
 fn main() {

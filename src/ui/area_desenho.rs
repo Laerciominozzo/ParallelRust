@@ -10,21 +10,13 @@ pub struct Desenho {
 }
 
 impl Desenho{
-    pub fn new(builder:Builder, espaco: Espaco) -> Desenho
+    pub fn new<F: Fn(&Image, &cairo::Context) -> Inhibit + 'static>(builder: &Builder, f : F) -> Desenho
+
       {
           let area :Image = builder.get_object("desenho").unwrap();
-
           let object = Desenho { desenho_area:area};
 
-          object.desenho_area.connect_draw(move |image, context|{
 
-              for e in espaco.getCoordinates(){
-                  context.arc(e.0, e.1, 1.0, 0.0, 360.0);
-                  context.fill();
-              }
-              context.stroke();
-              Inhibit(true)
-          });
 
           object
     }
