@@ -1,29 +1,26 @@
 use super::objeto::Objeto;
 use core::borrow::Borrow;
 
-#[derive(Clone)]
-pub struct Espaco{
-     objetos:Vec<Objeto>,
+
+pub struct Espaco<'a>{
+     objetos: Vec<Objeto<'a> >
 }
 
-impl Espaco{
-    pub fn new() ->   Espaco{
-        let mut espaco : Espaco =  Espaco{ objetos:Vec::new()};
-        espaco.InsertObject(10.0,10.0);
-        espaco.InsertObject(20.0, 20.0);
+impl<'a> Espaco<'a>{
+    pub fn new_with_objects(positions:& mut Vec<(f64,f64)>) ->  Espaco{
+        let mut espaco = Espaco{objetos: Vec::with_capacity(positions.capacity())};
+
+        for i in positions{
+            espaco.objetos.push(Objeto::new(i ));
+        }
         espaco
     }
 
-    pub fn InsertObject(&mut self, x:f64, y:f64) {
-        self.objetos.push(Objeto::new(x,y));
-
-    }
-
-
 
     pub fn processa(& mut self){
-        for  objeto in & mut self.objetos{
-            objeto.setCoordinates(objeto.calcNewPosition());
+        for objeto in &mut self.objetos{
+            let coordinates = objeto.calcNewPosition();
+             objeto.setCoordinates(coordinates);
         }
 
     }

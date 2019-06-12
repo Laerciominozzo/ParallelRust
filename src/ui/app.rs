@@ -2,6 +2,7 @@ use gtk::{Window, Builder, Image};
 use gtk::prelude::{*};
 
 use super::Espaco;
+use gdk::enums::key::Open;
 
 pub struct App{
     desenho_area: Image,
@@ -42,10 +43,12 @@ impl App{
 
     }
 
+
     pub fn rodadaProcessamento(&mut self, numeroRodadas: u32){
         for _i in 0 .. numeroRodadas{
             self.processa();
         }
+
     }
 
     fn processa(&mut self){
@@ -54,3 +57,4 @@ impl App{
 
 
 }
+/*https://stackoverflow.com/questions/31595115/how-can-i-get-my-own-data-to-a-gtk-callback-when-using-rust-gnome*/

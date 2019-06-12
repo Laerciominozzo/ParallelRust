@@ -1,27 +1,24 @@
-#[derive(Clone)]
-pub struct Objeto{
-    posicaoX:f64,
-    posicaoY:f64,
-    inerciaX:f32,
-    inerciaY:f32,
+
+pub struct Objeto<'a>{
+    posicao:&'a mut (f64,f64),
+
 }
 
-impl Objeto{
-    pub fn new(x:f64, y:f64) -> Objeto{
-        Objeto{posicaoX: x, posicaoY: y, inerciaX: 2.0, inerciaY: 1.0}
+impl<'a> Objeto<'a>{
+    pub fn new(position: &mut (f64,f64)) -> Objeto{
+        Objeto{posicao: position}
     }
 
     pub fn getCoordinates(&self) -> (f64,f64){
-        (self.posicaoX, self.posicaoY)
+        *self.posicao
     }
 
-    pub fn setCoordinates(&mut self, cordinates: (f64,f64)){
-        self.posicaoX = cordinates.0;
-        self.posicaoY = cordinates.1;
+    pub fn setCoordinates(& mut self, cordinates: (f64,f64)){
+        *self.posicao = cordinates;
     }
 
     pub fn calcNewPosition(&self) -> (f64, f64){
-        (self.posicaoX + self.inerciaX as f64,
-         self.posicaoY + self.inerciaY as f64)
+        (self.posicao.0 + 2 as f64,
+         self.posicao.1 + 2 as f64)
     }
 }
