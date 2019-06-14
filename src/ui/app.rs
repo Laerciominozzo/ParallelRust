@@ -4,15 +4,15 @@ use gtk::prelude::{*};
 use super::Espaco;
 use gdk::enums::key::Open;
 
-pub struct App{
+pub struct App<'a>{
     desenho_area: Image,
     janela: Window,
-    espaco:Espaco,
+    espaco:Espaco<'a>,
 }
 
 
-impl App{
-    pub fn novo(  ) -> App {
+impl<'a> App<'a>{
+    pub fn novo( mut espaco :  Espaco) -> App {
 
         let glade_src = include_str!("../window.glade");
         let builder = gtk::Builder::new_from_string(glade_src);
@@ -20,13 +20,12 @@ impl App{
         let janela:Window = builder.get_object("janela").unwrap();
 
         janela.show_all();
-        let  espaco = Espaco::new();
 
-        let e_espaco = espaco.clone();
+        let e_espaco :&Espaco = &espaco;
         area.connect_draw(move|image, context| {
 
-            let mut espaco = e_espaco.clone();
-            espaco.processa();
+
+            e_espaco.getValues();
             context.stroke();
             Inhibit(true)
         });

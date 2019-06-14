@@ -1,11 +1,11 @@
 
 pub struct Objeto<'a>{
-    posicao:&'a mut (f64,f64),
+    posicao: &'a mut (f64,f64),
 
 }
 
 impl<'a> Objeto<'a>{
-    pub fn new(position: &mut (f64,f64)) -> Objeto{
+    pub fn new(position: & mut (f64,f64)) -> Objeto{
         Objeto{posicao: position}
     }
 
@@ -20,5 +20,9 @@ impl<'a> Objeto<'a>{
     pub fn calcNewPosition(&self) -> (f64, f64){
         (self.posicao.0 + 2 as f64,
          self.posicao.1 + 2 as f64)
+    }
+
+    pub fn show(&self) -> String{
+        format!("({}, {})",self.posicao.0, self.posicao.1 )
     }
 }

@@ -25,4 +25,30 @@ impl<'a> Espaco<'a>{
 
     }
 
+    pub fn show(&self) -> Option<String>{
+        let mut retorno = String::new();
+
+        for obj in &self.objetos{
+            retorno.push_str(obj.show().as_str());
+        }
+
+        match retorno.len() {
+            0 => None,
+            _ => Some(retorno)
+        }
+    }
+
+    pub fn getValues(&self) -> Option <Vec<(f64, f64) > > {
+        let mut retorno : Vec<(f64,f64)> = Vec::with_capacity(self.objetos.len());
+
+        for obj in &self.objetos{
+            retorno.push(obj.getCoordinates());
+        }
+
+        match retorno.len() {
+            0=> None,
+            _=> Some(retorno)
+        }
+    }
+
 }
