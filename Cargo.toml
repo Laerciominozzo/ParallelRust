@@ -6,9 +6,10 @@ edition = "2018"
 
 [dependencies]
 gtk = "^0"
-gio = "^0"
 gdk = "^0"
-cairo-rs = "^0"
+gdk-pixbuf = "^0"
+rand = "0.7.0-pre.1"
+
 
 [features]
 gtk_3_10 = ["gtk/v3_10"]

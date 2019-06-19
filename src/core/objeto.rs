@@ -1,28 +1,38 @@
 
 pub struct Objeto<'a>{
-    posicao: &'a mut (f64,f64),
-
+    posicao: &'a mut (f64, f64),
+    inercia: &'a mut (f32, f32)
 }
 
 impl<'a> Objeto<'a>{
-    pub fn new(position: & mut (f64,f64)) -> Objeto{
-        Objeto{posicao: position}
+    pub fn new(position: &'a mut (f64,f64), inercia: &'a mut (f32,f32)) -> Objeto<'a>{
+        Objeto{posicao: position, inercia: inercia}
     }
 
-    pub fn getCoordinates(&self) -> (f64,f64){
+    pub fn get_coordinates(&self) -> (f64,f64){
         *self.posicao
     }
 
-    pub fn setCoordinates(& mut self, cordinates: (f64,f64)){
+    pub fn set_coordinates(& mut self, cordinates: (f64,f64)){
         *self.posicao = cordinates;
     }
 
-    pub fn calcNewPosition(&self) -> (f64, f64){
-        (self.posicao.0 + 2 as f64,
-         self.posicao.1 + 2 as f64)
+    pub fn calc_new_position(&self) -> (f64, f64){
+        (self.posicao.0 + self.inercia.0 as f64,
+         self.posicao.1 + self.inercia.1 as f64)
     }
 
     pub fn show(&self) -> String{
-        format!("({}, {})",self.posicao.0, self.posicao.1 )
+        format!("({:.2}, {:.2})",self.posicao.0, self.posicao.1 )
+    }
+
+    pub fn print(&self, pixbuf : & mut gdk_pixbuf::Pixbuf) {
+        unsafe {
+            let pixels = pixbuf.get_pixels();
+            let coord = self.get_coordinates();
+            for i in 0..10 {
+                pixels[((coord.0 + coord.1) as usize+ i) * 10 ] = 255;
+            }
+        }
     }
 }
