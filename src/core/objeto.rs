@@ -26,13 +26,5 @@ impl<'a> Objeto<'a>{
         format!("({:.2}, {:.2})",self.posicao.0, self.posicao.1 )
     }
 
-    pub fn print(&self, pixbuf : & mut gdk_pixbuf::Pixbuf) {
-        unsafe {
-            let pixels = pixbuf.get_pixels();
-            let coord = self.get_coordinates();
-            for i in 0..10 {
-                pixels[((coord.0 + coord.1) as usize+ i) * 10 ] = 255;
-            }
-        }
-    }
+
 }

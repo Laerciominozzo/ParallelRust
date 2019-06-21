@@ -42,22 +42,10 @@ impl<'a> Espaco<'a>{
         }
     }
 
-    pub fn get_values(&self) -> Option <Vec<(f64, f64) > > {
-        let mut retorno : Vec<(f64,f64)> = Vec::with_capacity(self.objetos.len());
 
+    pub fn print_objects<T, F:Fn(&Objeto,&T)>(&self , t: &T, f:F){
         for obj in &self.objetos{
-            retorno.push(obj.get_coordinates());
-        }
-
-        match retorno.len() {
-            0=> None,
-            _=> Some(retorno)
-        }
-    }
-
-    pub fn print(&self, pixbuf : & mut gdk_pixbuf::Pixbuf){
-        for obj in &self.objetos{
-            obj.print(pixbuf);
+            f(obj,t);
         }
     }
 

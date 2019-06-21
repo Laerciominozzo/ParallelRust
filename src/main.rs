@@ -1,7 +1,8 @@
 extern crate rand;
-
 use rand::Rng;
+use std::process;
 
+mod MyApp;
 mod ui;
 mod core;
 
@@ -27,13 +28,12 @@ fn main() {
 
     if gtk::init().is_err() {
         eprintln!("failed to initialize GTK Application");
-     //   process::exit(1);
+        process::exit(1);
     }
-
     let  espaco = Espaco::new_with_objects(& mut posicoes, & mut inercias);
-    let mut app = ui::App::novo(espaco) ;
-    app.conect_events();
-    app.desenha();
+    let my_app = MyApp::MyApp::new(espaco);
+
+
     gtk::main();
 
 

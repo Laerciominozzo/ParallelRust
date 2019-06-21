@@ -1,6 +1,4 @@
-mod app;
-use super::core::Espaco as Espaco;
+mod myWindow;
+mod imageArea;
 
-pub use self::app::App;
-
-
+pub use self::myWindow::MyWindow;
