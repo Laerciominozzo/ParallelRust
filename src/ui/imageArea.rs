@@ -43,9 +43,15 @@ impl ImageArea{
         match self.image.get_pixbuf() {
             Some(T) => unsafe{
                 let mut pixels= T.get_pixels();
-                pixels[((x*self.width as f64 + y)*3.0) as usize] = 255;
-                pixels[((x*self.width as f64 + y)*3.0+1.0) as usize] = 255;
-                pixels[((x*self.width as f64 + y)*3.0+2.0) as usize] = 255;
+                match self.calc_vewport((x,y)){
+                    Some(T) =>{
+                         pixels[position * 3 ] = 255;
+                         pixels[position * 3 + 1 ] = 255;
+                         pixels[position * 3 + 2 ] = 255;
+                    },
+                    _
+                }
+               
             },
             None => println!("Erro ao obter o pixbuf!"),
 
@@ -54,12 +60,17 @@ impl ImageArea{
     }
 
     fn calc_vewport(&self,coordnates : &(f64,f64) ) -> Option<usize>{
+        if coordnates.0 < upper_border.0 || coordnates.1  < upper_border.1 || coordnates.0 > botton_border.0 || coordnates.1 > botton_border.1{
+            None
+        } else {
+            if self.width == 0 || self.heigt == 0 {
+                panic!{"Division by 0 in viewport calc!"}
+            }
+            let pos_x = (self.botton_border.0 - self.upper_border.0) / self.width) as f64 * (coordnates.0 - self.upper_border.0;
+            let pos_y = (self.botton_border.1 - self.upper_border.1) / self.heigt) as f64 * (coordnates.1 - self.upper_border.1;
 
-
-        let pos_x = (self.botton_border.0 - self.upper_border.0) / (self.width) as f64 * (coordnates.0 - self.upper_border.0);
-        let pos_y = (self.botton_border.1 - self.upper_border.1) / (self.heigt) as f64 * (coordnates.1 - self.upper_border.1);
-
-        Some((pos_x * self.width as f64 + pos_y) as usize)
+            Some((pos_x * self.width as f64 + pos_y) as usize)
+        }
     }
 
 
