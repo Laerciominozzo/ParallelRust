@@ -31,10 +31,11 @@ impl ImageArea{
             botton_border: BORDER_BOTTON
         };
 
-        let mut pixbuf =gdk_pixbuf::Pixbuf::new(gdk_pixbuf::Colorspace::Rgb,
+        let pixbuf =  gdk_pixbuf::Pixbuf::new(gdk_pixbuf::Colorspace::Rgb,
                                                 false, 8,image_area.width,
-                                                image_area.heigt);
-        image_area.image.set_from_pixbuf(Some(&pixbuf));
+                                                image_area.heigt).unwrap();
+           image_area.image.set_from_pixbuf(&pixbuf);
+
 
         image_area
     }
@@ -43,13 +44,13 @@ impl ImageArea{
         match self.image.get_pixbuf() {
             Some(T) => unsafe{
                 let mut pixels= T.get_pixels();
-                match self.calc_vewport((x,y)){
+                match self.calc_vewport(&(x,y)){
                     Some(T) =>{
-                         pixels[position * 3 ] = 255;
-                         pixels[position * 3 + 1 ] = 255;
-                         pixels[position * 3 + 2 ] = 255;
+                         pixels[T* 3 ] = 255;
+                         pixels[T * 3 + 1 ] = 255;
+                         pixels[T* 3 + 2 ] = 255;
                     },
-                    _
+                    None => ()
                 }
                
             },
@@ -60,14 +61,17 @@ impl ImageArea{
     }
 
     fn calc_vewport(&self,coordnates : &(f64,f64) ) -> Option<usize>{
-        if coordnates.0 < upper_border.0 || coordnates.1  < upper_border.1 || coordnates.0 > botton_border.0 || coordnates.1 > botton_border.1{
+        if coordnates.0 < self.upper_border.0 ||
+            coordnates.1  < self.upper_border.1 ||
+            coordnates.0 > self.botton_border.0 ||
+            coordnates.1 > self.botton_border.1{
             None
         } else {
             if self.width == 0 || self.heigt == 0 {
                 panic!{"Division by 0 in viewport calc!"}
             }
-            let pos_x = (self.botton_border.0 - self.upper_border.0) / self.width) as f64 * (coordnates.0 - self.upper_border.0;
-            let pos_y = (self.botton_border.1 - self.upper_border.1) / self.heigt) as f64 * (coordnates.1 - self.upper_border.1;
+            let pos_x = (self.botton_border.0 - self.upper_border.0) / self.width as f64 * coordnates.0 - self.upper_border.0;
+            let pos_y = (self.botton_border.1 - self.upper_border.1) / self.heigt as f64 * coordnates.1 - self.upper_border.1;
 
             Some((pos_x * self.width as f64 + pos_y) as usize)
         }
