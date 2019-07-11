@@ -43,9 +43,9 @@ impl<'a> Espaco<'a>{
     }
 
 
-    pub fn print_objects<T, F:Fn(&Objeto,&T)>(&self , t: &T, f:F){
+    pub fn print_objects< F:Fn(&Objeto)>(&self , f:F){
         for obj in &self.objetos{
-            f(obj,t);
+            f(obj);
         }
     }
 
